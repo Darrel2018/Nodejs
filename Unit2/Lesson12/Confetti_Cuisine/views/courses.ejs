@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="col-sm-6">
+    <img src="images/fruit.jpg" alt="">
+  </div>
+  <div class="col-sm-6">
+    <h1 class="title">Learn to cook cutting edge food</h1>
+    <h1>Our Courses</h1>
+    <% offeredCourses.forEach(course => { %>
+    <h5>
+      <%= course.title %>
+    </h5>
+    <span>$
+      <%= course.cost %> </span>
+    <% }); %>
+  </div>
+</div>
+
+<%# 
+This code is an HTML template with embedded EJS that displays a 
+two-column layout. One column shows an image, while the other presents 
+headings and dynamically lists available courses. It loops through the 
+offeredCourses array and outputs each course’s title and cost, allowing 
+course data to be rendered dynamically on the page.
+%>
