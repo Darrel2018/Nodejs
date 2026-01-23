@@ -3,12 +3,17 @@ const Subscriber = require("../models/subscriber");
 
 exports.getAllSubscribers = (req, res, next) => {
   Subscriber.find({})
+    .exec()
     .then(subscribers => {
       req.data = subscribers;
       next();
     })
     .catch(error => {
+      console.log(error.message);
       next(error);
+    })
+    .then(() => {
+      console.log("promise complete");
     });
 };
 
