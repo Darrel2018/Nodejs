@@ -63,5 +63,53 @@ module.exports = {
   showView: (req, res) => {
     res.render("users/show");
   },
+
+  edit: async (req, res, next) => {
+    let userId = req.params.id;
+
+    try {
+      let user = await User.findById(userId);
+      res.render("users/edit", { user: user });
+    } catch (error) {
+      console.log(`Error fetching user by ID: ${error.message}`);
+      next(error);
+    }
+  },
+
+  update: async (req, res, next) => {
+    let userId = req.params.id;
+    let userParams = {
+      name: {
+        first: req.body.first,
+        last: req.body.last
+      },
+      email: req.body.email,
+      password: req.body.password,
+      zipCode: req.body.zipCode
+    };
+
+    try {
+      let user = await User.findByIdAndUpdate(userId, { $set: userParams });
+      res.locals.redirect = `/users/${userId}`;
+      res.locals.user = user;
+      next();
+    } catch (error) {
+      console.log(`Error updating user by ID: ${error.message}`);
+      next(error);
+    }
+  },
+
+  delete: async (req, res, next) => {
+    let userId = req.params.id;
+
+    try {
+      await User.findByIdAndDelete(userId);
+      res.locals.redirect = "/users";
+      next();
+    } catch (error) {
+      console.log(`Error deleting user by ID: ${error.message}`);
+      next(error);
+    }
+  },
 };
 

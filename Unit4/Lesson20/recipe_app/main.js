@@ -4,6 +4,7 @@ const layouts = require("express-ejs-layouts");
 const errorController = require("./controllers/errorController");
 const subscribersController = require("./controllers/subscribersController");
 const usersController = require("./controllers/usersController");
+const methodOverride = require("method-override");
 const router = express.Router();
 const app = express();
 
@@ -31,6 +32,10 @@ app.use(
 );
 app.use(express.json());
 
+router.use(methodOverride("_method", {
+    methods: ["POST", "GET"]
+}));
+
 app.use("/", router);
 
 router.get("/subscribers", subscribersController.getAllSubscribers, subscribersController.displaySubscribers);
@@ -42,6 +47,9 @@ router.get("/users", usersController.index, usersController.indexView);
 router.get("/users/new", usersController.new);
 router.post("/users/create", usersController.create, usersController.redirectView);
 router.get("/users/:id", usersController.show, usersController.showView);
+router.get("/users/:id/edit", usersController.edit);
+router.put("/users/:id/update", usersController.update, usersController.redirectView);
+router.delete("/users/:id/delete", usersController.delete, usersController.redirectView);
 
 app.use(errorController.logErrors);
 app.use(errorController.respondNoResourceFound);
