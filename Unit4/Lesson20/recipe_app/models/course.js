@@ -10,6 +10,10 @@ const courseSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    cost: {
+        type: Number,
+        required: true
+    },
     items: [],
     zipCode: {
         type: Number,

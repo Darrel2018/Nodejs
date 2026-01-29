@@ -4,6 +4,7 @@ const layouts = require("express-ejs-layouts");
 const errorController = require("./controllers/errorController");
 const subscribersController = require("./controllers/subscribersController");
 const usersController = require("./controllers/usersController");
+const coursesController = require("./controllers/coursesController");
 const methodOverride = require("method-override");
 const router = express.Router();
 const app = express();
@@ -38,12 +39,29 @@ router.use(methodOverride("_method", {
 
 app.use("/", router);
 
-router.get("/subscribers", subscribersController.getAllSubscribers, subscribersController.displaySubscribers);
-router.get("/contact", subscribersController.getSubscriptionPage);
-router.post("/subscribe", subscribersController.saveSubscriber);
+// Home Routes
+router.get("/", homeController.displayHomePage);
 
+// Course Routes
+router.get("/courses", coursesController.showCourses);
+router.get("/courses/new", coursesController.new);
+router.post("/courses/create", coursesController.create, coursesController.redirectView);
+router.get("/courses/:id", coursesController.show, coursesController.showView);
+router.get("/courses/:id/edit", coursesController.edit);
+router.put("/courses/:id/update", coursesController.update, coursesController.redirectView);
+router.delete("/courses/:id/delete", coursesController.delete, coursesController.redirectView);
+
+// Subscriber Routes
+router.get("/subscribers", subscribersController.showSubscribers);
+router.get("/subscribers/new", subscribersController.new);
+router.post("/subscribers/create", subscribersController.create, subscribersController.redirectView);
+router.get("/subscribers/:id", subscribersController.show, subscribersController.showView);
+router.get("/subscribers/:id/edit", subscribersController.edit);
+router.put("/subscribers/:id/update", subscribersController.update, subscribersController.redirectView);
+router.delete("/subscribers/:id/delete", subscribersController.delete, subscribersController.redirectView);
+
+// User Routes
 router.get("/users", usersController.index, usersController.indexView);
-
 router.get("/users/new", usersController.new);
 router.post("/users/create", usersController.create, usersController.redirectView);
 router.get("/users/:id", usersController.show, usersController.showView);

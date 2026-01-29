@@ -53,7 +53,7 @@ a {
   cursor: pointer;
   display: inline-block;
   color: #fff;
-  margin-bottom: 2;
+  margin-bottom: 5px;
 }
 
 .button:hover {
