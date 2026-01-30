@@ -1,6 +1,6 @@
-<a class="button" href="/subscribers/new">Create Subscriber</a>
+<a class="button" href="/users/new">Create User</a>
 
-<h2 class="center">Subscribers Table</h2>
+<h2 class="center">Users Table</h2>
 <table class="table">
     <thead>
         <tr>
@@ -11,23 +11,23 @@
         </tr>
     </thead>
     <tbody>
-        <% subscribers.forEach(subscriber=> { %>
+        <% users.forEach(user=> { %>
             <tr>
                 <td>
-                    <a href="<%= `/subscribers/${subscriber._id}` %>">
-                        <%= subscriber.name %>
+                    <a href="<%= `/users/${user._id}` %>">
+                        <%= user.fullName %>
                     </a>
                 </td>
                 <td>
-                    <%= subscriber.email %>
+                    <%= user.email %>
                 </td>
                 <td>
-                    <a href="<%=`subscribers/${subscriber._id}/edit` %>">
+                    <a href="<%=`users/${user._id}/edit` %>">
                         Edit
                     </a>
                 </td>
                 <td>
-                    <a href="<%=`subscribers/${subscriber._id}/delete?_method=DELETE` %>"
+                    <a href="<%=`users/${user._id}/delete?_method=DELETE` %>"
                         onclick="return confirm('Are you sure you want to delete this record?')">Delete</a>
                 </td>
             </tr>

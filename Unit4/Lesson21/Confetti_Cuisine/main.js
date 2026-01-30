@@ -4,6 +4,7 @@ const layouts = require("express-ejs-layouts");
 const errorController = require("./controllers/errorController");
 const mongoose = require("mongoose");
 const subscribersController = require("./controllers/subscribersController");
+const userController = require("./controllers/userController");
 const methodOverride = require("method-override");
 const app = express();
 const router = express.Router()
@@ -37,26 +38,29 @@ router.use(methodOverride("_method", {
 
 app.use("/", router);
 
-app.get("/", (req, res) => {
-    res.render("index");
-});
 
+
+// Home routes
+app.get("/", homeController.displayHomePage);
 app.get("/courses", homeController.showCourses);
-// app.get("/contact", homeController.showSignUp);
-// app.post("/contact", homeController.postedSignUpForm);
-app.get("/subscribers", subscribersController.getAllSubscribers);
-app.get("/contact", subscribersController.getSubscriptionPage);
-app.post("/subscribe", subscribersController.saveSubscriber);
 
+// Subscriber routes
 router.get("/subscribers", subscribersController.index, subscribersController.indexView);
 router.get("/subscribers/new", subscribersController.new);
 router.post("/subscribers/create", subscribersController.create, subscribersController.redirectView);
-router.get("/subscribers/:id", subscribersController.show,
- subscribersController.showView);
+router.get("/subscribers/:id", subscribersController.show, subscribersController.showView);
 router.get("/subscribers/:id/edit", subscribersController.edit);
-router.put("/subscribers/:id/update", subscribersController.update,
- subscribersController.redirectView);
-router.delete("/subscribers/:id/delete",subscribersController.delete,subscribersController.redirectView)
+router.put("/subscribers/:id/update", subscribersController.update, subscribersController.redirectView);
+router.delete("/subscribers/:id/delete",subscribersController.delete, subscribersController.redirectView);
+
+// User routes
+router.get("/users", userController.index, userController.indexView);
+router.get("/users/new", userController.new);
+router.post("/users/create", userController.create, userController.redirectView);
+router.get("/users/:id", userController.show, userController.showView);
+router.get("/users/:id/edit", userController.edit);
+router.put("/users/:id/update", userController.update, userController.redirectView);
+router.delete("/users/:id/delete", userController.delete, userController.redirectView);
 
 app.use(errorController.pageNotFoundError);
 app.use(errorController.internalServerError);

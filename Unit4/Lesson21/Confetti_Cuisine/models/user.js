@@ -58,13 +58,13 @@ userSchema.pre("save", async function (next) {
         email: user.email
       });
       user.subscribedAccount = subscriber;
-      next();
+    //   next();
     } catch (error) {
       console.log(`Error in connecting subscriber: ${error.message}`);
-      next(error);
+    //   next(error);
     }
   } else {
-    next();
+    // next();
   }
 });
 

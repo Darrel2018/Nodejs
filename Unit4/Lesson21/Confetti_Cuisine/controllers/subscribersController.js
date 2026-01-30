@@ -10,39 +10,6 @@ const getSubscriberParams = (body) => {
 };
 
 module.exports = {
-  getAllSubscribers: async (req, res, next) => {
-    try {
-      const subscribers = await Subscriber.find({});
-      console.log("We are getting all your subs");
-      res.render("subscribers", {
-        subscribers: subscribers
-      });
-    } catch (error) {
-      console.log(`Error fetching subscribers: ${error.message}`);
-      next(error);
-    }
-  },
-
-  getSubscriptionPage: (req, res) => {
-    res.render("contact");
-  },
-
-  saveSubscriber: async (req, res, next) => {
-    try {
-      let newSubscriber = new Subscriber({
-        name: req.body.name,
-        email: req.body.email,
-        zipCode: req.body.zipCode
-      });
-      
-      await newSubscriber.save();
-      console.log(`Here is all your contacts for the console log: ${newSubscriber}`);
-      res.render("thanks");
-    } catch (error) {
-      console.log(`Error saving subscriber: ${error.message}`);
-      next(error);
-    }
-  },
 
   index: async (req, res, next) => {
     try {
