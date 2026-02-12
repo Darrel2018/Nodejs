@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const coursesController = require("../controllers/coursesController");
-const usersController = require("../controllers/usersController")
+const usersController = require("../controllers/usersController");
 
 // router.use(usersController.verifyToken);
 
