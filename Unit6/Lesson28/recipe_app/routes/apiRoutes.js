@@ -2,7 +2,7 @@ const router = require("express").Router();
 const coursesController = require("../controllers/coursesController");
 const usersController = require("../controllers/usersController");
 
-// router.use(usersController.verifyToken);
+router.use(usersController.verifyToken);
 
 // router.post("/login", usersController.apiAuthenticate);
 

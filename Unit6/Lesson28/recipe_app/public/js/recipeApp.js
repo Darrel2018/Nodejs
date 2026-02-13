@@ -38,7 +38,7 @@ let addJoinButtonListener = () => {
     let $button = $(event.target),
       courseId = $button.data("id");
     
-    $.get(`/api/courses/${courseId}/join`, (results = {}) => {
+    $.get(`/api/courses/${courseId}/join?apiToken=recipeT0k3n`, (results = {}) => {
       let data = results.data;
       if (data && data.success) {
         $button
