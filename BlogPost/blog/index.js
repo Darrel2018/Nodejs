@@ -3,6 +3,7 @@ const app = new express();
 const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
 const expressSession = require('express-session');
+const flash = require('connect-flash');
 const newPostController = require('./controllers/newPost');
 const homeController = require('./controllers/home');
 const storePostController = require('./controllers/storePost');
@@ -39,6 +40,7 @@ app.use(expressSession({
     resave: false,
     saveUninitialized: false
 }));
+app.use(flash());
 app.use('/posts/store', validateMiddleware);
 app.use((req, res, next) => {
     loggedIn = req.session.userId;

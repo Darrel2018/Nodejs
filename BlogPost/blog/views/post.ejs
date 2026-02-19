@@ -16,13 +16,10 @@
                                 <h1>
                                     <%= blogpost.title %>
                                 </h1>
-                                <h2 class="subheading">
-                                    <%= blogpost.body %>
-                                </h2>
                                 <span class="meta">
                                     Posted by
                                     <a href="#">
-                                        <%= blogpost.username %>
+                                        <%= blogpost.userid.username %>
                                     </a>
                                     on <%= blogpost.datePosted.toDateString() %></span>
                                 </span>
@@ -37,7 +34,7 @@
                     <div class="row gx-4 gx-lg-5 justify-content-center">
                         <div class="col-md-10 col-lg-8 col-xl-7">
                             <p>
-                                <%= blogpost.body %>
+                                <%- blogpost.body %>
                             </p>
                         </div>
                     </div>

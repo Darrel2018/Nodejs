@@ -7,7 +7,9 @@ module.exports = async (req, res) => {
         await User.create(req.body);
         res.redirect('/');
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Error creating user');
+        const validationErrors = Object.keys(error.errors).map(key => error.errors[key].message);
+        req.flash('validationErrors', validationErrors);
+        req.flash('data', req.body);
+        res.redirect('/auth/register');
     }
 };
